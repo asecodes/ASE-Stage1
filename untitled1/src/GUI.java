@@ -19,7 +19,7 @@ public class GUI extends JFrame {
     private JLabel label1;
     private JLabel label2;
 
-    public GUI() {
+    public GUI() throws FormatException {
         // Initializing components
         button = new JButton("Submit");
         textField1 = new JTextField(20);
@@ -101,7 +101,11 @@ public class GUI extends JFrame {
         // Creating GUI instances
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI();
+                try {
+                    new GUI();
+                } catch (FormatException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
