@@ -109,15 +109,18 @@ public class PassengerGenerator {
         String isstatus = randomChecked();
         float LuggageWeight ;
         boolean status;
+        String LuggageSize;
         if(Objects.equals(isstatus,"true")){
             status = true;
-            LuggageWeight = Math.round(randomFloat(5f, 20f) * 10) / 10f;
+            LuggageWeight = Math.round(randomFloat(0f, 5f) * 10) / 10f;
+            LuggageSize = randomLuggageSize(1,3);
         }else{
             status = false;
             LuggageWeight = Math.round(randomFloat(5f, 35f) * 10) / 10f;
+            LuggageSize = randomLuggageSize(3,15);
         }
         //float LuggageWeight = Math.round(randomFloat(5f, 35f) * 10) / 10f;
-        String LuggageSize = randomLuggageSize(3,15);
+        //String LuggageSize = randomLuggageSize(3,15);
 
         return new Passenger(referenceCode, name, flightCode, status,LuggageSize, LuggageWeight);
     }
@@ -126,10 +129,11 @@ public class PassengerGenerator {
         return min + random.nextFloat() * (max - min);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FormatException {
         ConcurrentHashMap<String, Passenger> passengerMap = new ConcurrentHashMap<>();
         PassengerListManager pm = new PassengerListManager(passengerMap);
         ConcurrentHashMap<String, Flight> f = CheckMachine.readFlight("FlightList.csv");
+
         int i = 0;
 
         Passenger pa;
