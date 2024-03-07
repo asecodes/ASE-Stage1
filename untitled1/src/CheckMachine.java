@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
@@ -181,7 +182,7 @@ public class CheckMachine {
     }
 
 
-    public static ConcurrentHashMap<String,Flight> readFlight(String flightList){
+    public static ConcurrentHashMap<String,Flight> readFlight(String flightList) throws FormatException {
         try(BufferedReader bf = new BufferedReader(new FileReader(flightList))) {
             String line;
             boolean isFirstLine = true;
@@ -203,9 +204,14 @@ public class CheckMachine {
             }
             return pl;
 
+        } catch (FileNotFoundException e) {
+            throw new FormatException("File not found", "100");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+
     }
 
 }

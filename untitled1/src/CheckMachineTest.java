@@ -44,7 +44,7 @@ class CheckMachineTest {
     }
 
     @Test
-    void readFlight() {
+    void readFlight() throws FormatException {
         // 执行测试
         ConcurrentHashMap<String, Flight> flightMap = CheckMachine.readFlight("flightList.csv");
         assertNotNull(flightMap);
